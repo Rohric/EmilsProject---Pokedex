@@ -1,6 +1,5 @@
-
 async function searchPokemon() {
-  let searchValue = document.getElementById('searchInput').value;
+  let searchValue = document.getElementById("searchInput").value;
   if (searchValue.length < 3) {
     closeMatches();
     return;
@@ -23,18 +22,18 @@ async function searchPokemon() {
 
 function closeMatches() {
   showGlobalLoader();
-  let refMatches = document.getElementById('searchMatches');
-  let refCards = document.getElementById('cards');
+  let refMatches = document.getElementById("searchMatches");
+  let refCards = document.getElementById("cards");
 
-  refMatches.classList.add('d_none');
-  refMatches.innerHTML = '';
-  refCards.classList.remove('d_none');
-  showPokemonNumberList()
+  refMatches.classList.add("d_none");
+  refMatches.innerHTML = "";
+  refCards.classList.remove("d_none");
+  showPokemonNumberList();
   hideGlobalLoader();
 }
 
 function getMatches(searchValue) {
-  let refSearchValue = searchValue;
+  let refSearchValue = searchValue.trim().toLowerCase();
   Matchets = [];
   PokemonList.forEach((entry, index) => {
     if (entry.name.toLowerCase().includes(refSearchValue)) {
