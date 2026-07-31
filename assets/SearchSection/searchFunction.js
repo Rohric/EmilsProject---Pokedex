@@ -4,13 +4,19 @@ async function searchPokemon() {
     closeMatches();
     return;
   }
-  resetSearchArrays();
-  getMatches(searchValue);
+  let matches = getMatches(searchValue);
 
   showGlobalLoader();
-  await loadSearchDetails();
-  await loadSearchSpecies();
+  let details = await loadSearchDetails(matches);
+  let species = await loadSearchSpecies(details);
   hideGlobalLoader();
+
+  applySearchResults(details, species);
+}
+
+function applySearchResults(details, species) {
+  SearchDetails = details;
+  SearchSpecies = species;
 
   getSearchPokemonName();
   getSearchPokemonImage();

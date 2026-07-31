@@ -19,21 +19,20 @@ function resetSearchArrays() {
 
 
 
-async function loadSearchDetails() {
-  SearchDetails = [];
-  for (let k = 0; k < Matchets.length; k++) {
-    let i = Matchets[k];
-    let res = await fetch(PokemonList[i].url);
-    let det = await res.json();
-    SearchDetails.push(det);
+async function loadSearchDetails(matches) {
+  let details = [];
+  for (let k = 0; k < matches.length; k++) {
+    let res = await fetch(PokemonList[matches[k]].url);
+    details.push(await res.json());
   }
+  return details;
 }
 
-async function loadSearchSpecies() {
-  SearchSpecies = [];
-  for (let k = 0; k < SearchDetails.length; k++) {
-    let res = await fetch(SearchDetails[k].species.url);
-    let spec = await res.json();
-    SearchSpecies.push(spec);
+async function loadSearchSpecies(details) {
+  let species = [];
+  for (let k = 0; k < details.length; k++) {
+    let res = await fetch(details[k].species.url);
+    species.push(await res.json());
   }
+  return species;
 }
